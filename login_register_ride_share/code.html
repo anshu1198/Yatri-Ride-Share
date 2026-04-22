@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#00236f",
+                        "on-primary-fixed-variant": "#264191",
+                        "tertiary": "#4b1c00",
+                        "surface-container": "#eeedf4",
+                        "surface": "#faf8ff",
+                        "secondary-fixed": "#ffddb8",
+                        "on-tertiary-fixed": "#341100",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#ffdbcb",
+                        "tertiary-container": "#6e2c00",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "surface-variant": "#e3e1e9",
+                        "on-surface": "#1a1b21",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#1e3a8a",
+                        "inverse-surface": "#2f3036",
+                        "on-secondary-container": "#684000",
+                        "outline": "#757682",
+                        "outline-variant": "#c5c5d3",
+                        "surface-bright": "#faf8ff",
+                        "surface-container-high": "#e9e7ef",
+                        "secondary-container": "#fea619",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e3e1e9",
+                        "on-tertiary-fixed-variant": "#773205",
+                        "surface-tint": "#4059aa",
+                        "secondary": "#855300",
+                        "primary-fixed": "#dce1ff",
+                        "inverse-primary": "#b6c4ff",
+                        "on-surface-variant": "#444651",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "on-secondary-fixed": "#2a1700",
+                        "inverse-on-surface": "#f1f0f7",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#90a8ff",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#dad9e1",
+                        "on-tertiary-container": "#f39461",
+                        "on-background": "#1a1b21",
+                        "surface-container-low": "#f4f3fa",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#00164e",
+                        "background": "#faf8ff",
+                        "tertiary-fixed-dim": "#ffb691"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "container-margin": "20px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "gutter": "12px",
+                        "unit": "4px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display": ["Inter"],
+                        "label-bold": ["Inter"],
+                        "body-md": ["Inter"],
+                        "price-display": ["Inter"],
+                        "h2": ["Inter"],
+                        "h1": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-bold": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "price-display": ["20px", {"lineHeight": "24px", "letterSpacing": "0.02em", "fontWeight": "700"}],
+                        "h2": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ambient-shadow {
+            box-shadow: 0 4px 20px -2px rgba(30, 58, 138, 0.08);
+        }
+        .glass-panel {
+            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-white dark:bg-slate-900 fixed top-0 w-full z-50 border-b border-slate-100 dark:border-slate-800 shadow-sm dark:shadow-none h-20 flex justify-between items-center px-8 max-w-full mx-auto">
+<div class="flex items-center gap-lg">
+<span class="text-2xl font-black text-blue-900 dark:text-white tracking-tighter">SwiftRide</span>
+<nav class="hidden md:flex gap-md items-center h-full">
+<a class="font-sans text-sm font-semibold tracking-tight text-slate-600 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-300 transition-all duration-200" href="#">Find a Ride</a>
+<a class="font-sans text-sm font-semibold tracking-tight text-slate-600 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-300 transition-all duration-200" href="#">Offer a Ride</a>
+<a class="font-sans text-sm font-semibold tracking-tight text-slate-600 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-300 transition-all duration-200" href="#">Safety</a>
+<a class="font-sans text-sm font-semibold tracking-tight text-slate-600 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-300 transition-all duration-200" href="#">Help</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button class="font-sans text-sm font-semibold tracking-tight text-slate-600 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-300 transition-all duration-200 active:scale-95 px-4 py-2">Log In</button>
+<button class="font-sans text-sm font-semibold tracking-tight bg-primary text-on-primary px-6 py-2.5 rounded-full active:scale-95 duration-150 transition-all">Sign Up</button>
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-400 cursor-pointer" data-icon="account_circle">account_circle</span>
+</div>
+</header>
+<main class="flex-grow flex items-stretch pt-20">
+<!-- Visual Column (Asymmetric Layout) -->
+<section class="hidden lg:flex w-1/2 relative overflow-hidden bg-primary-container">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-60" data-alt="Modern high-end electric vehicle interior with ambient blue lighting and digital dashboard in a professional urban setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcqtd4PuP8nrng85wQpUFBw-W3YBLFeEIrmnkDCmyRPV6JDc1441l0Kt-CV6D6Iy8niFr9jVNwLQxhmlQNd0RVYpZfPac77YEPn3cnpSdTtIISaNxoFjCLaFFIXIdBA4dqq1gmATC7-HEIc27G1VKhUyUYfoeICdO5-0aHIIJHoiqAPRkn6F28ruR8u2rnjrVpgo6y191VrwF9SO1xxxcgPpc9K3kPs0Vf1o-f4ULnHuH3gNlxDafFBYDEzEOqqgbviJLy8Prq7SY-"/>
+<div class="absolute inset-0 bg-gradient-to-tr from-primary via-primary/40 to-transparent"></div>
+</div>
+<div class="relative z-10 p-20 flex flex-col justify-end text-on-primary">
+<h1 class="font-display text-display mb-md">Redefining Urban Connectivity.</h1>
+<p class="font-body-lg text-body-lg max-w-md opacity-90">Experience the next generation of professional ride-sharing designed for the modern commuter.</p>
+<div class="mt-xl flex gap-md">
+<div class="flex items-center gap-sm bg-white/10 backdrop-blur-md px-md py-sm rounded-lg border border-white/20">
+<span class="material-symbols-outlined text-secondary-container" data-icon="verified_user">verified_user</span>
+<span class="font-label-bold text-label-bold">Enterprise Grade Security</span>
+</div>
+<div class="flex items-center gap-sm bg-white/10 backdrop-blur-md px-md py-sm rounded-lg border border-white/20">
+<span class="material-symbols-outlined text-secondary-container" data-icon="schedule">schedule</span>
+<span class="font-label-bold text-label-bold">99.9% Punctual</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Form Column -->
+<section class="w-full lg:w-1/2 flex items-center justify-center p-container-margin lg:p-xl bg-surface">
+<div class="w-full max-w-[480px] space-y-lg">
+<div class="space-y-sm">
+<h2 class="font-h1 text-h1 text-primary">Welcome Back</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Access your professional mobility dashboard.</p>
+</div>
+<!-- Social Logins -->
+<div class="grid grid-cols-2 gap-md">
+<button class="flex items-center justify-center gap-sm px-md py-sm border border-outline-variant rounded-lg font-label-bold text-on-surface hover:bg-surface-container transition-all active:scale-95 duration-150">
+<img alt="Google" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPoszTOO_i03SxwMbEb77pAsUSMQewW6AdrmMotPC7UXKoxvxTzxTefnKG67-HQKxQ2hGpCrdNyn3U70gPlW7M1kb90muemihYp0yUSVIpaYc-YyU1HJtBi5Zd8MhZORV9fbjwoW5MTZAO43ZAhx1ooxRS97zspQK5lPae51_UHeuvEv5BxQaAUWKLl6fGn8P2mfG_P6jSEFzThd66CsxKCVh099SDnJWe1V8hqQiVW0ApJjiuS43pZN4eX6VnvvhcIYqv-wHXX-lZ"/>
+                        Google
+                    </button>
+<button class="flex items-center justify-center gap-sm px-md py-sm border border-outline-variant rounded-lg font-label-bold text-on-surface hover:bg-surface-container transition-all active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="apple" data-weight="fill" style="font-variation-settings: 'FILL' 1;">ios</span>
+                        Apple
+                    </button>
+</div>
+<div class="relative py-sm">
+<div class="absolute inset-0 flex items-center"><span class="w-full border-t border-outline-variant"></span></div>
+<div class="relative flex justify-center text-xs uppercase"><span class="bg-surface px-md text-outline font-label-bold">Or continue with email</span></div>
+</div>
+<!-- Credentials Form -->
+<form class="space-y-md">
+<div class="space-y-xs">
+<label class="font-label-bold text-on-surface" for="email">Work Email</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline" data-icon="mail">mail</span>
+<input class="w-full pl-xl pr-md py-sm bg-surface-container-low rounded-lg border-0 focus:ring-2 focus:ring-primary-container transition-all text-body-md" id="email" placeholder="name@company.com" type="email"/>
+</div>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between items-center">
+<label class="font-label-bold text-on-surface" for="password">Password</label>
+<a class="text-primary font-label-bold hover:underline" href="#">Forgot password?</a>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline" data-icon="lock">lock</span>
+<input class="w-full pl-xl pr-md py-sm bg-surface-container-low rounded-lg border-0 focus:ring-2 focus:ring-primary-container transition-all text-body-md" id="password" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<input class="w-4 h-4 text-primary border-outline-variant rounded focus:ring-primary-container" id="remember" type="checkbox"/>
+<label class="font-body-sm text-on-surface-variant" for="remember">Stay signed in for 30 days</label>
+</div>
+<button class="w-full bg-secondary-container text-on-secondary-container py-md rounded-lg font-h2 text-h2 ambient-shadow hover:brightness-105 active:scale-[0.98] transition-all" type="submit">Sign In</button>
+</form>
+<div class="text-center pt-md">
+<p class="font-body-md text-on-surface-variant">
+                        Don't have an account? 
+                        <a class="text-primary font-h2 text-h2 hover:underline" href="#">Create an account</a>
+</p>
+</div>
+<!-- Security Badge -->
+<div class="mt-xl pt-lg border-t border-outline-variant/30 flex items-center justify-center gap-md grayscale opacity-50">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]" data-icon="security">security</span>
+<span class="font-label-bold text-[10px]">AES-256 ENCRYPTION</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]" data-icon="shield_check">shield</span>
+<span class="font-label-bold text-[10px]">ISO 27001 COMPLIANT</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="w-full border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950">
+<div class="max-w-7xl mx-auto px-8 py-16 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-12">
+<div class="col-span-2">
+<span class="text-lg font-bold text-blue-900 dark:text-white mb-4 block">SwiftRide</span>
+<p class="font-sans text-xs font-normal text-slate-500 dark:text-slate-400">© 2024 SwiftRide Mobility Inc. All rights reserved. Reliable. Secure. Punctual.</p>
+</div>
+<div class="space-y-sm">
+<p class="font-label-bold text-primary dark:text-blue-300">Company</p>
+<a class="block font-sans text-xs font-normal text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 hover:underline transition-all" href="#">About Us</a>
+<a class="block font-sans text-xs font-normal text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 hover:underline transition-all" href="#">Careers</a>
+<a class="block font-sans text-xs font-normal text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 hover:underline transition-all" href="#">Press</a>
+</div>
+<div class="space-y-sm">
+<p class="font-label-bold text-primary dark:text-blue-300">Resources</p>
+<a class="block font-sans text-xs font-normal text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 hover:underline transition-all" href="#">Newsletter Signup</a>
+<a class="block font-sans text-xs font-normal text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 hover:underline transition-all" href="#">Community Guidelines</a>
+</div>
+<div class="space-y-sm">
+<p class="font-label-bold text-primary dark:text-blue-300">Legal</p>
+<a class="block font-sans text-xs font-normal text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 hover:underline transition-all" href="#">Terms of Service</a>
+<a class="block font-sans text-xs font-normal text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 hover:underline transition-all" href="#">Privacy Policy</a>
+</div>
+</div>
+</footer>
+</body></html>
