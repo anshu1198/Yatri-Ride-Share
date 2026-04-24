@@ -38,7 +38,7 @@ const getRide = async (req, res) => {
 // Create ride
 const createRide = async (req, res) => {
   try {
-    const { pickupLocation, dropoffLocation, date, time, seats, price, description } = req.body;
+    const { pickupLocation, dropoffLocation, date, time, seats, price, description, vehicleModel, vehicleColor } = req.body;
 
     const ride = new Ride({
       driver: req.user.id,
@@ -48,7 +48,11 @@ const createRide = async (req, res) => {
       time,
       seats,
       price,
-      description
+      description,
+      vehicleInfo: {
+        model: vehicleModel,
+        color: vehicleColor
+      }
     });
 
     await ride.save();
@@ -75,7 +79,7 @@ const updateRide = async (req, res) => {
       return res.status(401).json({ message: 'Not authorized' });
     }
 
-    const { pickupLocation, dropoffLocation, date, time, seats, price, description, status } = req.body;
+    const { pickupLocation, dropoffLocation, date, time, seats, price, description, status, vehicleModel, vehicleColor } = req.body;
 
     const updateFields = {};
     if (pickupLocation) updateFields.pickupLocation = pickupLocation;
@@ -86,6 +90,13 @@ const updateRide = async (req, res) => {
     if (price) updateFields.price = price;
     if (description !== undefined) updateFields.description = description;
     if (status) updateFields.status = status;
+    
+    if (vehicleModel || vehicleColor) {
+      updateFields.vehicleInfo = {
+        model: vehicleModel || ride.vehicleInfo.model,
+        color: vehicleColor || ride.vehicleInfo.color
+      };
+    }
 
     ride = await Ride.findByIdAndUpdate(
       req.params.id,

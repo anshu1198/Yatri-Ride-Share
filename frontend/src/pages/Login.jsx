@@ -1,55 +1,107 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { useAuth } from "../context/AuthContext";
-import { toast } from "react-toastify";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { toast } from 'react-toastify';
+import { Mail, Lock, ArrowRight, Globe } from 'lucide-react';
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
 
-  const validationSchema = Yup.object({
-    email: Yup.string().email("Invalid email").required("Required"),
-    password: Yup.string().required("Required"),
-  });
-
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setLoading(true);
     try {
-      await login(values.email, values.password);
-      toast.success("Login successful!");
-      navigate("/dashboard");
-    } catch (err) {
-      toast.error("Login failed");
+      await login(email, password);
+      toast.success('Welcome back!');
+      navigate('/search');
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Login failed');
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full space-y-8 p-8">
-        <div>
-          <h2 className="text-3xl font-bold text-center">Welcome Back</h2>
+    <div className="min-h-[80vh] flex items-center justify-center px-6">
+      <div className="max-w-md w-full space-y-12 animate-fade-in">
+        <div className="text-center">
+          <h2 className="text-5xl font-black text-black tracking-tighter mb-4">Welcome back</h2>
+          <p className="text-gray-500 font-medium">Enter your details to continue your journey.</p>
         </div>
-        <Formik initialValues={{ email: "", password: "" }} validationSchema={validationSchema} onSubmit={handleSubmit}>
-          <Form className="space-y-6">
-            <div>
-              <Field name="email" type="email" placeholder="Email" className="w-full p-3 border rounded" />
-              <ErrorMessage name="email" component="div" className="text-red-500 text-sm" />
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="space-y-4">
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <Mail className="h-5 w-5 text-gray-400" />
+              </div>
+              <input
+                type="email"
+                required
+                className="input-premium pl-12"
+                placeholder="Email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
-            <div>
-              <Field name="password" type="password" placeholder="Password" className="w-full p-3 border rounded" />
-              <ErrorMessage name="password" component="div" className="text-red-500 text-sm" />
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <Lock className="h-5 w-5 text-gray-400" />
+              </div>
+              <input
+                type="password"
+                required
+                className="input-premium pl-12"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
-            <button type="submit" disabled={loading} className="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700">
-              {loading ? "Signing in..." : "Sign in"}
-            </button>
-          </Form>
-        </Formik>
-        <p className="text-center">
-          Dont have an account? <Link to="/register" className="text-blue-600">Sign up</Link>
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full btn-uber flex items-center justify-center gap-3 py-5 rounded-2xl"
+          >
+            {loading ? 'Processing...' : (
+              <>
+                Sign In
+                <ArrowRight className="w-5 h-5" />
+              </>
+            )}
+          </button>
+        </form>
+
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-gray-100"></div>
+          </div>
+          <div className="relative flex justify-center text-sm uppercase font-black tracking-widest">
+            <span className="px-4 bg-white text-gray-400">Or continue with</span>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <button className="flex items-center justify-center gap-3 py-4 bg-gray-50 hover:bg-gray-100 rounded-2xl transition-all font-bold border border-gray-100">
+            <Globe className="w-5 h-5" />
+            Google
+          </button>
+          <button className="flex items-center justify-center gap-3 py-4 bg-gray-50 hover:bg-gray-100 rounded-2xl transition-all font-bold border border-gray-100">
+            <Globe className="w-5 h-5" />
+            GitHub
+          </button>
+        </div>
+
+        <p className="text-center text-gray-500 font-medium">
+          Don't have an account?{' '}
+          <Link to="/register" className="text-black font-black hover:underline underline-offset-4">
+            Sign up
+          </Link>
         </p>
       </div>
     </div>

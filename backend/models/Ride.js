@@ -1,4 +1,4 @@
-﻿const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 const rideSchema = new mongoose.Schema({
   driver: {
@@ -37,6 +37,11 @@ const rideSchema = new mongoose.Schema({
   description: {
     type: String,
     trim: true
+  },
+  vehicleInfo: {
+    model: { type: String, default: 'Standard Sedan' },
+    color: { type: String, default: 'White' },
+    plateNumber: { type: String, default: 'TBD' }
   },
   passengers: [{
     type: mongoose.Schema.Types.ObjectId,
