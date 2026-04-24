@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import rideService from '../services/rideService';
 import { toast } from 'react-toastify';
 import { MapPin, Calendar, Clock, Users, IndianRupee, FileText, Send, Sparkle, Car } from 'lucide-react';
 
 const PostRide = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [formData, setFormData] = useState({
     pickupLocation: '',
     dropoffLocation: '',
@@ -16,6 +18,10 @@ const PostRide = () => {
     description: ''
   });
   const [loading, setLoading] = useState(false);
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

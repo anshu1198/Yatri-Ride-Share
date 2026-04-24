@@ -16,27 +16,74 @@ exports.createBooking = async (req, res) => {
       return res.status(400).json({ message: 'Not enough seats available' });
     }
 
-    const totalPrice = ride.price * seatsBooked;
+    // Prevent duplicate bookings
+    const existingBooking = await Booking.findOne({
+      ride: rideId,
+      passenger: passengerId,
+      status: { $in: ['pending', 'confirmed'] }
+    });
+
+    if (existingBooking) {
+      return res.status(400).json({ message: 'You have already booked or requested a seat for this ride.' });
+    }
+
+    const totalPrice = (ride.price || 0) * seatsBooked;
 
     const booking = new Booking({
       ride: rideId,
       passenger: passengerId,
       seatsBooked,
       totalPrice,
-      status: 'confirmed'
+      status: 'pending' // changed from confirmed
     });
 
     await booking.save();
+    res.status(201).json(booking);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
-    // Update available seats in ride
-    ride.seats -= seatsBooked;
-    if (ride.seats === 0) {
-      ride.status = 'booked';
+// Approve booking
+exports.approveBooking = async (req, res) => {
+  try {
+    const booking = await Booking.findById(req.params.id);
+    if (!booking) return res.status(404).json({ message: 'Booking not found' });
+    
+    const ride = await Ride.findById(booking.ride);
+    if (ride.driver.toString() !== req.user.id) {
+      return res.status(403).json({ message: 'Unauthorized' });
     }
-    ride.passengers.push(passengerId);
+
+    booking.status = 'confirmed';
+    await booking.save();
+
+    ride.seats -= booking.seatsBooked;
+    if (ride.seats === 0) ride.status = 'booked';
+    ride.passengers.push(booking.passenger);
     await ride.save();
 
-    res.status(201).json(booking);
+    res.json(booking);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Reject booking
+exports.rejectBooking = async (req, res) => {
+  try {
+    const booking = await Booking.findById(req.params.id);
+    if (!booking) return res.status(404).json({ message: 'Booking not found' });
+    
+    const ride = await Ride.findById(booking.ride);
+    if (ride.driver.toString() !== req.user.id) {
+      return res.status(403).json({ message: 'Unauthorized' });
+    }
+
+    booking.status = 'cancelled';
+    await booking.save();
+
+    res.json(booking);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -50,7 +97,23 @@ exports.getUserBookings = async (req, res) => {
       .populate({
         path: 'ride',
         populate: { path: 'driver', select: 'name email' }
-      });
+      })
+      .sort({ createdAt: -1 });
+    res.json(bookings);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Get all booking requests for a driver's offered rides
+exports.getDriverBookings = async (req, res) => {
+  try {
+    const rides = await Ride.find({ driver: req.user.id }).select('_id');
+    const rideIds = rides.map(r => r._id);
+    const bookings = await Booking.find({ ride: { $in: rideIds } })
+      .populate('ride')
+      .populate('passenger', 'name email')
+      .sort({ createdAt: -1 });
     res.json(bookings);
   } catch (error) {
     res.status(500).json({ message: error.message });

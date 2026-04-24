@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Menu, X, User, LogOut, Search, CirclePlus, History, LayoutDashboard, ChevronDown } from 'lucide-react';
+import { Menu, X, User, LogOut, Search, CirclePlus, History, LayoutDashboard, ChevronDown, Moon, Sun } from 'lucide-react';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDark, setIsDark] = useState(false);
+
+  const toggleTheme = () => {
+    setIsDark(!isDark);
+    document.documentElement.classList.toggle('dark');
+  };
 
   const handleLogout = () => {
     logout();
@@ -21,9 +27,9 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
             <div className="h-10 w-10 bg-black flex items-center justify-center text-white rounded-lg group-hover:rotate-6 transition-transform">
-              <span className="text-xl font-black italic">R</span>
+              <span className="text-xl font-black italic">Y</span>
             </div>
-            <span className="text-xl font-black text-black tracking-tighter">RideShare</span>
+            <span className="text-xl font-black text-black tracking-tighter">Yatri</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -36,6 +42,10 @@ const Navbar = () => {
             </Link>
             
             <div className="h-6 w-px bg-gray-200"></div>
+
+            <button onClick={toggleTheme} className="p-2 rounded-full hover:bg-gray-100 transition-colors">
+              {isDark ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5 text-gray-600" />}
+            </button>
 
             {user ? (
               <div className="flex items-center gap-6">

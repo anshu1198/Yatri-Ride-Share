@@ -3,7 +3,15 @@ const Ride = require('../models/Ride');
 // Get all rides
 const getRides = async (req, res) => {
   try {
-    const rides = await Ride.find()
+    const { pickupLocation, dropoffLocation, date, seats } = req.query;
+    const filter = { status: 'available' };
+    
+    if (pickupLocation) filter.pickupLocation = { $regex: new RegExp(pickupLocation, 'i') };
+    if (dropoffLocation) filter.dropoffLocation = { $regex: new RegExp(dropoffLocation, 'i') };
+    if (date) filter.date = date;
+    if (seats) filter.seats = { $gte: Number(seats) };
+
+    const rides = await Ride.find(filter)
       .populate('driver', 'name email')
       .populate('passengers', 'name email')
       .sort({ createdAt: -1 });

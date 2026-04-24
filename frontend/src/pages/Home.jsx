@@ -138,7 +138,7 @@ const Home = () => {
         <div className="bg-gray-900 rounded-[4rem] p-20 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-12 group">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-white/5 to-transparent"></div>
           <div className="relative z-10 max-w-xl space-y-8">
-            <h2 className="text-5xl font-black text-white leading-none tracking-tighter">Start your journey <br />with RideShare today.</h2>
+            <h2 className="text-5xl font-black text-white leading-none tracking-tighter">Start your journey <br />with Yatri today.</h2>
             <div className="flex gap-4">
               <Link to="/register" className="bg-white text-black px-10 py-5 rounded-2xl font-black text-lg hover:bg-gray-100 transition-all">
                 Join Community

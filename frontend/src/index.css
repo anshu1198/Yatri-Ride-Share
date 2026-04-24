@@ -86,3 +86,36 @@ html {
 .animate-slide-in-right {
   animation: slideInRight 0.5s ease-out forwards;
 }
+
+/* Dark Theme Overrides */
+html.dark body {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+html.dark .bg-white, html.dark .bg-gray-50, html.dark .bg-gray-100 {
+  background-color: #111827 !important;
+}
+html.dark .text-black, html.dark .text-gray-900 {
+  color: #ffffff !important;
+}
+html.dark .text-gray-500, html.dark .text-gray-400 {
+  color: #9ca3af !important;
+}
+html.dark .border-gray-100, html.dark .border-gray-50, html.dark .border-gray-200 {
+  border-color: #374151 !important;
+}
+html.dark .nav-blur {
+  background-color: rgba(17, 24, 39, 0.8) !important;
+}
+html.dark .btn-uber {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+html.dark .input-premium {
+  background-color: #1f2937 !important;
+  color: #ffffff !important;
+  border-color: #374151 !important;
+}
+html.dark .bg-indigo-50, html.dark .bg-emerald-50 {
+  background-color: #1f2937 !important;
+}

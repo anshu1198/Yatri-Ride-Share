@@ -4,7 +4,7 @@ import { MapPin, Calendar, Clock, Users, IndianRupee, ArrowRight, ShieldCheck, C
 
 const RideCard = ({ ride }) => {
   return (
-    <div className="card-premium group relative overflow-hidden bg-white">
+    <div className="card-premium group relative overflow-hidden bg-white hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
       <div className="p-6 sm:p-8">
         {/* Header: Driver & Badge */}
         <div className="flex justify-between items-center mb-8">
@@ -18,7 +18,7 @@ const RideCard = ({ ride }) => {
               </div>
             </div>
             <div>
-              <p className="text-sm font-black text-gray-900">{ride.driver?.name || 'Verified Driver'}</p>
+              <p className="text-sm font-black text-gray-900">{ride.driver?.name || 'Rahul (Guest)'}</p>
               <div className="flex items-center gap-1 text-amber-500 text-[10px]">
                 <Star className="w-3 h-3 fill-amber-500" />
                 <span className="font-bold">4.8</span>
@@ -29,7 +29,7 @@ const RideCard = ({ ride }) => {
           <div className="text-right">
             <div className="text-2xl font-black text-gray-900 flex items-center justify-end tracking-tighter">
               <IndianRupee className="w-5 h-5" />
-              {ride.price}
+              {ride.price || 499}
             </div>
             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mt-0.5">Instant Booking</p>
           </div>
@@ -42,13 +42,13 @@ const RideCard = ({ ride }) => {
           <div className="relative mb-6">
             <div className="absolute -left-7 top-1 w-4 h-4 rounded-full border-2 border-gray-900 bg-white z-10"></div>
             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">From</p>
-            <h3 className="text-lg font-black text-gray-900 leading-tight">{ride.pickupLocation}</h3>
+            <h3 className="text-lg font-black text-gray-900 leading-tight">{ride.pickupLocation || 'New Delhi'}</h3>
           </div>
 
           <div className="relative">
             <div className="absolute -left-7 top-1 w-4 h-4 rounded-full bg-gray-900 z-10"></div>
             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">To</p>
-            <h3 className="text-lg font-black text-gray-900 leading-tight">{ride.dropoffLocation}</h3>
+            <h3 className="text-lg font-black text-gray-900 leading-tight">{ride.dropoffLocation || 'Mumbai'}</h3>
           </div>
         </div>
 
@@ -56,15 +56,15 @@ const RideCard = ({ ride }) => {
         <div className="grid grid-cols-3 gap-2 py-6 border-y border-gray-50 mb-8">
           <div className="text-center">
             <Calendar className="w-4 h-4 mx-auto mb-2 text-gray-400" />
-            <p className="text-[10px] font-black text-gray-900">{ride.date}</p>
+            <p className="text-[10px] font-black text-gray-900">{ride.date || 'Today'}</p>
           </div>
           <div className="text-center border-x border-gray-50">
             <Clock className="w-4 h-4 mx-auto mb-2 text-gray-400" />
-            <p className="text-[10px] font-black text-gray-900">{ride.time}</p>
+            <p className="text-[10px] font-black text-gray-900">{ride.time || '10:00 AM'}</p>
           </div>
           <div className="text-center">
             <Users className="w-4 h-4 mx-auto mb-2 text-gray-400" />
-            <p className="text-[10px] font-black text-gray-900">{ride.seats} available</p>
+            <p className="text-[10px] font-black text-gray-900">{ride.seats || 2} available</p>
           </div>
         </div>
 
@@ -75,7 +75,9 @@ const RideCard = ({ ride }) => {
           </div>
           <div>
             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Vehicle Details</p>
-            <p className="text-sm font-bold text-gray-900">Swift Dzire (White)</p>
+            <p className="text-sm font-bold text-gray-900">
+              {ride.vehicleInfo?.model || 'Standard Sedan'} ({ride.vehicleInfo?.color || 'White'})
+            </p>
           </div>
         </div>
 

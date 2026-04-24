@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="col-span-1 md:col-span-1">
-            <h2 className="text-2xl font-black mb-6 text-indigo-400">RideShare</h2>
+            <h2 className="text-2xl font-black mb-6 text-indigo-400">Yatri</h2>
             <p className="text-gray-400 leading-relaxed mb-6">
               Connecting drivers and passengers for a more economical, comfortable, and eco-friendly travel experience.
             </p>
@@ -37,10 +37,10 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-bold mb-6">Support</h3>
             <ul className="space-y-4">
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Help Center</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Safety Guidelines</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+              <li><a href="/" className="text-gray-400 hover:text-white transition-colors">Help Center</a></li>
+              <li><a href="/" className="text-gray-400 hover:text-white transition-colors">Safety Guidelines</a></li>
+              <li><a href="/" className="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+              <li><a href="/" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
             </ul>
           </div>
 
@@ -57,14 +57,14 @@ const Footer = () => {
               </li>
               <li className="flex items-center text-gray-400">
                 <Mail className="w-5 h-5 mr-3 text-indigo-400" />
-                <span>support@rideshare.com</span>
+                <span>support@yatri.com</span>
               </li>
             </ul>
           </div>
         </div>
 
         <div className="pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
-          <p>© {new Date().getFullYear()} RideShare. All rights reserved. Built with Passion.</p>
+          <p>© {new Date().getFullYear()} Yatri. All rights reserved. Built with Passion.</p>
         </div>
       </div>
     </footer>

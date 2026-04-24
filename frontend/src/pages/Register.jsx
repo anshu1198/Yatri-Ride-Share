@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
-import { Mail, Lock, User, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Mail, Lock, User, ArrowRight, ShieldCheck, Eye, EyeOff, Car, Navigation } from 'lucide-react';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +11,8 @@ const Register = () => {
     password: '',
     confirmPassword: ''
   });
+  const [showPassword, setShowPassword] = useState(false);
+  const [role, setRole] = useState('rider');
   const [loading, setLoading] = useState(false);
   const { register } = useAuth();
   const navigate = useNavigate();
@@ -26,11 +28,11 @@ const Register = () => {
     }
     setLoading(true);
     try {
-      await register({
-        name: formData.name,
-        email: formData.email,
-        password: formData.password
-      });
+      await register(
+        formData.name,
+        formData.email,
+        formData.password
+      );
       toast.success('Account created successfully!');
       navigate('/search');
     } catch (error) {
@@ -49,6 +51,27 @@ const Register = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="flex bg-gray-50 p-1 rounded-2xl mb-6 border border-gray-100">
+            <button
+              type="button"
+              onClick={() => setRole('rider')}
+              className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-black text-sm transition-all ${
+                role === 'rider' ? 'bg-white text-black shadow-sm' : 'text-gray-400 hover:text-gray-600'
+              }`}
+            >
+              <Navigation className="w-4 h-4" /> Sign up as Rider
+            </button>
+            <button
+              type="button"
+              onClick={() => setRole('driver')}
+              className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-black text-sm transition-all ${
+                role === 'driver' ? 'bg-white text-black shadow-sm' : 'text-gray-400 hover:text-gray-600'
+              }`}
+            >
+              <Car className="w-4 h-4" /> Sign up as Driver
+            </button>
+          </div>
+
           <div className="space-y-4">
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -83,24 +106,31 @@ const Register = () => {
                 <Lock className="h-5 w-5 text-gray-400" />
               </div>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name="password"
                 required
-                className="input-premium pl-12"
+                className="input-premium pl-12 pr-12"
                 placeholder="Password"
                 value={formData.password}
                 onChange={handleChange}
               />
+              <button 
+                type="button" 
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 right-0 pr-4 flex items-center"
+              >
+                {showPassword ? <EyeOff className="h-5 w-5 text-gray-400" /> : <Eye className="h-5 w-5 text-gray-400" />}
+              </button>
             </div>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                 <Lock className="h-5 w-5 text-gray-400" />
               </div>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name="confirmPassword"
                 required
-                className="input-premium pl-12"
+                className="input-premium pl-12 pr-12"
                 placeholder="Confirm Password"
                 value={formData.confirmPassword}
                 onChange={handleChange}
