@@ -1,0 +1,19 @@
+# Set default behavior for line endings
+* text=auto
+
+# Tell GitHub Linguist to ignore these mockup/prototype folders for repository language statistics.
+# This prevents HTML/CSS from overpowering the actual MERN stack (JavaScript/JSX) codebase.
+dashboard_ride_share/** linguist-vendored
+home_ride_share/** linguist-vendored
+kinetic_trust/** linguist-vendored
+login_register/** linguist-vendored
+login_register_ride_share/** linguist-vendored
+ride_dashboard/** linguist-vendored
+ride_details/** linguist-vendored
+ride_details_ride_share/** linguist-vendored
+welcome_onboarding_1/** linguist-vendored
+welcome_onboarding_2/** linguist-vendored
+
+# Ignore all HTML and CSS files globally for language stats, ensuring JavaScript/JSX is detected as the primary language
+*.html linguist-detectable=false
+*.css linguist-detectable=false
